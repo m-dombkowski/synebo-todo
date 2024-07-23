@@ -3,9 +3,14 @@ const config: Config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "check-gradient":
+          "linear-gradient(to right bottom, rgba(87,221,255,1) , rgba(192,88,243,1))",
+      },
       colors: {
-        "check gradient":
-          "linear-gradient(hsl(192, 100%, 67%) to hsl(280, 87%, 65%))",
+        "light-blue-gradient": "hsl(192, 100%, 67%)",
+        "purple-gradient": "hsl(280, 87%, 65%)",
+
         "bright-blue": "hsl(220, 98%, 61%)",
         "l-very-dark-grayish-blue": "hsl(235, 19%, 35%)",
         "l-dark-grayish-blue": "hsl(236, 9%, 61%)",
