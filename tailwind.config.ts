@@ -25,6 +25,10 @@ const config: Config = {
         "d-very-dark-grayish-blue": "hsl(233, 14%, 35%)",
         "d-very-dark-grayish-blue-hover": "hsl(237, 14%, 26%)",
       },
+      fontFamily: {
+        josefinSans: ["JosefinSans"],
+        josefinSansBold: ["JosefinSansBold"],
+      },
     },
   },
   plugins: [],
