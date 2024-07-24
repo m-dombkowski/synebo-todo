@@ -9,7 +9,9 @@ export type TaskType = {
 
 interface TaskContextType {
   tasks: Array<TaskType>;
-  addTask: React.Dispatch<React.SetStateAction<Array<TaskType>>>;
+  filteredTasks: Array<TaskType>;
+  setTasks: React.Dispatch<React.SetStateAction<Array<TaskType>>>;
+  setFilteredTasks: React.Dispatch<React.SetStateAction<Array<TaskType>>>;
 }
 
 export const TaskContext = createContext<TaskContextType | undefined>(
@@ -21,10 +23,13 @@ interface TaskProviderProps {
 }
 
 export const TaskProvider: FC<TaskProviderProps> = ({ children }) => {
-  const [tasks, addTask] = useState<Array<TaskType>>([]);
+  const [tasks, setTasks] = useState<Array<TaskType>>([]);
+  const [filteredTasks, setFilteredTasks] = useState<Array<TaskType>>([]);
 
   return (
-    <TaskContext.Provider value={{ tasks, addTask }}>
+    <TaskContext.Provider
+      value={{ tasks, setTasks, filteredTasks, setFilteredTasks }}
+    >
       {children}
     </TaskContext.Provider>
   );
