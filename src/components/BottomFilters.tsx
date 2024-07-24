@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { TaskContext, TaskType } from "../lib/context/Tasks";
 import { motion } from "framer-motion";
 
@@ -47,20 +47,26 @@ export default function BottomFilters() {
     [setFilteredTasks, tasks]
   );
 
+  useEffect(() => {
+    handleFilteringTasks(chosenFilter);
+  }, [chosenFilter, handleFilteringTasks]);
+
   const HighlightedFilterButton = ({ name }: { name: string }) => {
-    return <span className=" text-bright-blue font-bold">{name}</span>;
+    return (
+      <span className=" text-bright-blue font-josefinSansBold">{name}</span>
+    );
   };
 
   const FilterButton = ({ name }: { name: string }) => {
     return (
-      <span className="text-l-dark-grayish-blue font-bold hover:text-l-very-dark-grayish-blue transition duration-300">
+      <span className="text-l-dark-grayish-blue font-josefinSansBold hover:text-l-very-dark-grayish-blue transition duration-300">
         {name}
       </span>
     );
   };
 
   return (
-    <ul className="flex gap-5 justify-center items-center mt-16">
+    <ul className="flex gap-5 justify-center items-center ">
       {filters.map((filter, index) => {
         return filter.completed[0] === chosenFilter[0] &&
           filter.completed[1] === chosenFilter[1] ? (

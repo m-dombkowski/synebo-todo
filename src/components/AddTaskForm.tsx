@@ -35,7 +35,7 @@ export default function AddTaskForm() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (!data.taskName) {
       // setting error and displaying error message if there is a submit with empty input field
-      setError("taskName", { message: `Field can't be empty` });
+      setError("taskName", { message: `Field can't be empty!` });
       return;
     }
     addNewTask(data);
@@ -44,13 +44,17 @@ export default function AddTaskForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full mb-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full mb-10 relative">
       <input
         {...register("taskName")}
-        className="w-full pl-20 pr-10 py-4 rounded-md text-lg"
+        className="w-full pl-20 pr-10 py-4 rounded-md text-lg font-josefinSans"
         placeholder="Create a new todo..."
       />
-      {errors.taskName && <span>{errors.taskName.message}</span>}
+      {errors.taskName && (
+        <span className="absolute left-1/3 right-1/3 -bottom-8 text-l-very-light-gray">
+          {errors.taskName.message}
+        </span>
+      )}
     </form>
   );
 }
