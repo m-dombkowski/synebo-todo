@@ -17,10 +17,10 @@ export default function AddTaskForm() {
 
   const context = useContext(TaskContext);
   if (!context) {
-    throw new Error("AddTaskForm Component must by used within a TaskProvider");
+    throw new Error("This Component must by used within a TaskProvider");
   }
 
-  const { tasks, addTask } = context;
+  const { tasks, setTasks, filteredTasks, setFilteredTasks } = context;
 
   const addNewTask = (data: Inputs) => {
     const newTask = {
@@ -28,7 +28,8 @@ export default function AddTaskForm() {
       completed: false,
       id: crypto.randomUUID(),
     };
-    addTask([...tasks, newTask]);
+    setTasks([...tasks, newTask]);
+    setFilteredTasks([...tasks, newTask]);
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -38,11 +39,12 @@ export default function AddTaskForm() {
       return;
     }
     addNewTask(data);
-    console.log(tasks);
+
+    console.log(tasks, filteredTasks);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full mb-6">
       <input
         {...register("taskName")}
         className="w-full pl-20 pr-10 py-4 rounded-md text-lg"
