@@ -13,6 +13,7 @@ export default function AddTaskForm() {
     handleSubmit,
     formState: { errors },
     setError,
+    resetField,
   } = useForm<Inputs>();
 
   const context = useContext(TaskContext);
@@ -40,16 +41,17 @@ export default function AddTaskForm() {
       return;
     }
     addNewTask(data);
+    resetField("taskName");
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full mb-4 md:mb-10  relative"
+      className="w-full mb-4 md:mb-6  relative"
     >
       <button
         onClick={handleSubmit(onSubmit)}
-        className=" absolute top-[52%] left-6 md:left-12 -translate-y-1/2 h-full"
+        className=" absolute top-[52%] left-6 -translate-y-1/2 h-full"
       >
         <div className="inline-flex items-center">
           <div className="bg-l-light-grayish-blue hover:bg-gradient-to-br from-light-blue-gradient to-purple-gradient rounded-full w-[18px] h-[18px] md:w-[26px] md:h-[26px] flex justify-center items-center">
@@ -85,12 +87,12 @@ export default function AddTaskForm() {
       </button>
       <input
         {...register("taskName")}
-        className="w-full pl-14 md:pl-[93px] pr-10 py-4 rounded-md text-xs md:text-lg font-josefinSans focus-visible:outline-none"
+        className="w-full pl-14 md:pl-[70px] pr-10 py-4 rounded-md text-xs md:text-lg font-josefinSans focus-visible:outline-none"
         placeholder="Create a new todo..."
       />
 
       {errors.taskName && (
-        <span className="absolute left-1/3 md:right-1/3  -bottom-4 md:-bottom-8 text-l-very-light-gray text-xs md:text-lg">
+        <span className="absolute left-1/3 md:right-1/3  -bottom-4 md:-bottom-7 text-l-very-light-gray text-xs md:text-lg">
           {errors.taskName.message}
         </span>
       )}
