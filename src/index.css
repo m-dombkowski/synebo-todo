@@ -25,7 +25,12 @@
   line-height: 1.5;
   color: hsl(235, 19%, 35%);
   font-synthesis: none;
+  min-height: 100svh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body {
+  background-color: hsl(235, 21%, 11%);
 }

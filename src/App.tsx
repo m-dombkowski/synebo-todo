@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <ScreenSizeContext.Provider value={{ deviceType }}>
-      <div className="md:max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans dark:bg-d-very-dark-blue -z-20 min-h-svh">
+      <div className="md:max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans dark:bg-d-very-dark-blue -z-20 ">
         <Header />
         <div className="w-[325px] sm:w-[550px] flex justify-center mt-[46px] md:mt-20 items-center flex-col z-10">
           <TopNav />

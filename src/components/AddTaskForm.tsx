@@ -47,7 +47,7 @@ export default function AddTaskForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full mb-4 md:mb-6  relative"
+      className="w-full mb-4 md:mb-6  relative rounded-lg "
     >
       <button
         onClick={handleSubmit(onSubmit)}
@@ -87,7 +87,8 @@ export default function AddTaskForm() {
       </button>
       <input
         {...register("taskName")}
-        className="w-full pl-14 md:pl-[70px] pr-10 py-4 rounded-md text-xs md:text-lg font-josefinSans focus-visible:outline-none"
+        className="w-full pl-14 md:pl-[70px] pr-10 py-4 rounded-md text-xs md:text-lg font-josefinSans focus-visible:outline-none dark:bg-d-very-dark-desaturated-blue dark:text-d-light-grayish-blue-hover placeholder:text-l-dark-grayish-blue
+        placeholder:opacity-50"
         placeholder="Create a new todo..."
       />
 
