@@ -5,6 +5,9 @@ import {
   Droppable,
   Draggable,
   DropResult,
+  useMouseSensor,
+  useKeyboardSensor,
+  useTouchSensor,
 } from "react-beautiful-dnd";
 import React from "react";
 import {
@@ -65,9 +68,9 @@ export default function DragAndDrop({
               {...provided.dragHandleProps}
               key={task.id}
               data-id={task.id}
-              className="flex items-center justify-between w-full py-5 border-b-2 group "
+              className="flex items-center justify-between w-full py-4 border-b-2 group "
             >
-              <div className="flex gap-3.5 md:gap-5 ml-6 md:ml-12 items-center">
+              <div className="flex gap-3.5 md:gap-5 ml-6 items-center">
                 <div className="inline-flex items-center ">
                   <div className="bg-l-light-grayish-blue hover:bg-gradient-to-br from-light-blue-gradient to-purple-gradient rounded-full w-[18px] h-[18px] md:w-[26px] md:h-[26px] flex justify-center items-center">
                     <label
@@ -105,7 +108,7 @@ export default function DragAndDrop({
                     task.completed
                       ? "line-through text-l-dark-grayish-blue"
                       : "",
-                    "text-[0.7rem] md:text-xl"
+                    "text-[0.7rem] md:text-lg"
                   )}
                 >
                   {task.title}
@@ -169,7 +172,11 @@ export default function DragAndDrop({
   }
   if (!context) return;
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext
+      onDragEnd={onDragEnd}
+      enableDefaultSensors={false}
+      sensors={[useMouseSensor, useKeyboardSensor, useTouchSensor]}
+    >
       <Droppable droppableId="list">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
