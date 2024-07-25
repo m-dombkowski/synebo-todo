@@ -63,7 +63,7 @@ export default function BottomFilters() {
   };
 
   return (
-    <ul className="flex gap-5 justify-center items-center ">
+    <ul className="flex gap-5 justify-center items-center md:mt-0 mt-10">
       {filters.map((filter, index) => {
         return filter.completed[0] === chosenFilter[0] &&
           filter.completed[1] === chosenFilter[1] ? (

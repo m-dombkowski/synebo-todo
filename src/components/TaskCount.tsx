@@ -10,7 +10,7 @@ export default function TaskCount({ tasks }: { tasks: Array<TaskType> }) {
   }, [tasks]);
 
   return (
-    <span className=" text-l-dark-grayish-blue">
+    <span className=" text-l-dark-grayish-blue text-xs md:text-lg">
       {activeTasks} {activeTasks === 1 ? "item" : "items"} left
     </span>
   );
