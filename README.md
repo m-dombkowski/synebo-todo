@@ -1,3 +1,17 @@
+This is recruitment task.
+
+It was written using React + Typescript for code and Tailwind.css for styling. Vite for "build", and many libraries smaller and bigger for some specific stuff (like react hook form, react beautiful dnd and many more).
+
+There is also local storage handling for list items and theme so when user refresh browser it stays the way it was.
+
+In order to test it please open empty directory and open terminal.
+Run commands in order:
+
+1. git init - To create git repository
+2. npm install - To install all dependencies
+3. npm run dev - To boot up local host. It should open under adress "http://localhost:5173/", but you should get message in terminal aswell.
+4. Happy coding, hope you like it ;) !
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -17,12 +31,12 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json", "./tsconfig.app.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
