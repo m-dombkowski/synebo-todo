@@ -1,23 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { useContext } from "react";
 import { TaskContext, TaskType } from "../lib/context/Tasks";
-import { cn } from "../lib/utils";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 import DragAndDrop from "./DragAndDropWrapper";
+import { updateLocalStorage, updateTasksAndLocalStorage } from "../lib/utils";
 
 export default function TaskList({
   taskList,
   filteredTasks,
 }: {
-  taskList: TaskType[];
-  filteredTasks: TaskType[];
+  taskList: Array<TaskType>;
+  filteredTasks: Array<TaskType>;
 }) {
   const context = useContext(TaskContext);
-
-  if (!context) {
-    throw new Error("This Component must by used within a TaskProvider");
-  }
   const { setTasks, setFilteredTasks } = context;
 
   const removeTaskHandler = (
@@ -28,9 +22,12 @@ export default function TaskList({
     const updatedList = taskList.filter(
       (task) => listItem?.dataset.id !== task.id
     );
-
-    setFilteredTasks(updatedList);
-    setTasks(updatedList);
+    updateTasksAndLocalStorage(
+      setFilteredTasks,
+      setTasks,
+      updateLocalStorage,
+      updatedList
+    );
   };
 
   const handleCompleteStatus = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +43,16 @@ export default function TaskList({
       return task;
     });
 
-    setFilteredTasks(updatedList);
-    setTasks(updatedList);
+    updateTasksAndLocalStorage(
+      setFilteredTasks,
+      setTasks,
+      updateLocalStorage,
+      updatedList
+    );
   };
 
   return (
-    <ul className="w-full bg-l-very-light-gray rounded-lg">
+    <ul className="w-full bg-l-very-light-gray rounded-lg max-h-[500px] overflow-auto">
       <DragAndDrop
         filteredTasks={filteredTasks}
         handleCompleteStatus={handleCompleteStatus}

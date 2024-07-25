@@ -1,17 +1,24 @@
 import { useContext } from "react";
 import { TaskContext, TaskType } from "../lib/context/Tasks";
+import { updateLocalStorage, updateTasksAndLocalStorage } from "../lib/utils";
 
-export default function ClearCompletedTasks({ tasks }: { tasks: TaskType[] }) {
+export default function ClearCompletedTasks({
+  tasks,
+}: {
+  tasks: Array<TaskType>;
+}) {
   const context = useContext(TaskContext);
-  if (!context) return;
-
   const { setFilteredTasks, setTasks } = context;
 
   const clearCompletedTasksHandler = () => {
     const clearedTasks = tasks.filter((task) => task.completed === false);
 
-    setFilteredTasks(clearedTasks);
-    setTasks(clearedTasks);
+    updateTasksAndLocalStorage(
+      setFilteredTasks,
+      setTasks,
+      updateLocalStorage,
+      clearedTasks
+    );
   };
 
   return (

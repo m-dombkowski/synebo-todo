@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TaskType } from "../lib/context/Tasks";
 
-export default function TaskCount({ tasks }: { tasks: TaskType[] }) {
+export default function TaskCount({ tasks }: { tasks: Array<TaskType> }) {
   const [activeTasks, setActiveTasks] = useState<number>(0);
 
   useEffect(() => {
@@ -10,6 +10,8 @@ export default function TaskCount({ tasks }: { tasks: TaskType[] }) {
   }, [tasks]);
 
   return (
-    <span className=" text-l-dark-grayish-blue">{activeTasks} items left</span>
+    <span className=" text-l-dark-grayish-blue">
+      {activeTasks} {activeTasks === 1 ? "item" : "items"} left
+    </span>
   );
 }

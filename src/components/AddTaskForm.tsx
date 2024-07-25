@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TaskContext } from "../lib/context/Tasks";
+import { updateLocalStorage, updateTasksAndLocalStorage } from "../lib/utils";
 
 type Inputs = {
   taskName: string;
@@ -16,11 +16,8 @@ export default function AddTaskForm() {
   } = useForm<Inputs>();
 
   const context = useContext(TaskContext);
-  if (!context) {
-    throw new Error("This Component must by used within a TaskProvider");
-  }
 
-  const { tasks, setTasks, filteredTasks, setFilteredTasks } = context;
+  const { tasks, setTasks, setFilteredTasks } = context;
 
   const addNewTask = (data: Inputs) => {
     const newTask = {
@@ -28,8 +25,11 @@ export default function AddTaskForm() {
       completed: false,
       id: crypto.randomUUID(),
     };
-    setTasks([...tasks, newTask]);
-    setFilteredTasks([...tasks, newTask]);
+
+    updateTasksAndLocalStorage(setFilteredTasks, setTasks, updateLocalStorage, [
+      ...tasks,
+      newTask,
+    ]);
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -39,8 +39,6 @@ export default function AddTaskForm() {
       return;
     }
     addNewTask(data);
-
-    console.log(tasks, filteredTasks);
   };
 
   return (

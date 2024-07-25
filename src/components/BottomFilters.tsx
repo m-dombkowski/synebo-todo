@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useCallback, useContext, useEffect, useState } from "react";
-import { TaskContext, TaskType } from "../lib/context/Tasks";
-import { motion } from "framer-motion";
+import { TaskContext } from "../lib/context/Tasks";
 
 type FiltersType = {
   name: string;
@@ -10,14 +8,13 @@ type FiltersType = {
 
 export default function BottomFilters() {
   const context = useContext(TaskContext);
-  const [chosenFilter, setChosenFilter] = useState<boolean[]>([true, false]);
-  if (!context) {
-    throw new Error("This Component must by used within a TaskProvider");
-  }
+  const [chosenFilter, setChosenFilter] = useState<Array<boolean>>([
+    true,
+    false,
+  ]);
 
   const { tasks, setFilteredTasks } = context;
-
-  const filters: FiltersType[] = [
+  const filters: Array<FiltersType> = [
     {
       name: "All",
       completed: [true, false],
@@ -33,12 +30,12 @@ export default function BottomFilters() {
   ];
 
   const handleFilteringTasks = useCallback(
-    (chosenFilterValue: boolean[]) => {
+    (chosenFilterValue: Array<boolean>) => {
       setFilteredTasks([]);
       setChosenFilter(chosenFilterValue);
       tasks.forEach((task) => {
         const isMutual = chosenFilterValue.includes(task.completed);
-        console.log(isMutual);
+
         if (isMutual) {
           setFilteredTasks((prevState) => [...prevState, task]);
         }

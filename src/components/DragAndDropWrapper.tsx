@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TaskContext, TaskType } from "../lib/context/Tasks";
 import {
   DragDropContext,
@@ -7,9 +7,17 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import React from "react";
-import { cn } from "../lib/utils";
+import {
+  cn,
+  updateLocalStorage,
+  updateTasksAndLocalStorage,
+} from "../lib/utils";
 
-const reorder = (list: TaskType[], startIndex: number, endIndex: number) => {
+const reorder = (
+  list: Array<TaskType>,
+  startIndex: number,
+  endIndex: number
+) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -109,12 +117,12 @@ export default function DragAndDrop({
   removeTaskHandler: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
-  filteredTasks: TaskType[];
+  filteredTasks: Array<TaskType>;
 }) {
   const context = useContext(TaskContext);
-  const { setFilteredTasks } = context;
+  const { setFilteredTasks, setTasks } = context;
 
-  const TaskList = ({ tasks }: { tasks: TaskType[] }) => {
+  const TaskList = ({ tasks }: { tasks: Array<TaskType> }) => {
     return tasks.map((task: TaskType, index: number) => (
       <Task
         handleCompleteStatus={handleCompleteStatus}
@@ -141,8 +149,12 @@ export default function DragAndDrop({
       result.source.index,
       result.destination.index
     );
-    console.log(tasks);
-    setFilteredTasks(tasks);
+    updateTasksAndLocalStorage(
+      setFilteredTasks,
+      setTasks,
+      updateLocalStorage,
+      tasks
+    );
   }
   if (!context) return;
   return (
