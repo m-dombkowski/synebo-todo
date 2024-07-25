@@ -171,7 +171,7 @@ export default function DragAndDrop({
       tasks
     );
   }
-  if (!context) return;
+
   return (
     <DragDropContext
       onDragEnd={onDragEnd}
