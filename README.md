@@ -8,9 +8,10 @@ In order to test it please open empty directory and open terminal.
 Run commands in order:
 
 1. git init - To create git repository
-2. npm install - To install all dependencies
-3. npm run dev - To boot up local host. It should open under adress "http://localhost:5173/", but you should get message in terminal aswell.
-4. Happy coding, hope you like it ;) !
+2. git pull https://github.com/m-dombkowski/synebo-todo.git - To download repository to your local machine.
+3. npm install - To install all dependencies
+4. npm run dev - To boot up local host. It should open under adress "http://localhost:5173/", but you should get message in terminal aswell.
+5. Happy coding, hope you like it ;) !
 
 # React + TypeScript + Vite
 
