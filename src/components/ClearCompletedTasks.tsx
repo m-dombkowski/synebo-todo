@@ -23,7 +23,7 @@ export default function ClearCompletedTasks({
 
   return (
     <button
-      className="text-l-dark-grayish-blue hover:text-l-very-dark-grayish-blue transition duration-300 text-xs md:text-lg"
+      className="text-l-dark-grayish-blue hover:text-l-very-dark-grayish-blue transition duration-300 text-sm"
       onClick={clearCompletedTasksHandler}
     >
       Clear Completed
