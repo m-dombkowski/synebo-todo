@@ -14,9 +14,14 @@ interface TaskContextType {
   setFilteredTasks: React.Dispatch<React.SetStateAction<Array<TaskType>>>;
 }
 
-export const TaskContext = createContext<TaskContextType | undefined>(
-  undefined
-);
+const defaultContext = {
+  tasks: [],
+  filteredTasks: [],
+  setFilteredTasks: () => {},
+  setTasks: () => {},
+};
+
+export const TaskContext = createContext<TaskContextType>(defaultContext);
 
 interface TaskProviderProps {
   children: ReactNode;
