@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddTaskForm from "./components/AddTaskForm";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
@@ -7,40 +7,52 @@ import { TaskContext } from "./lib/context/Tasks";
 import BottomFilters from "./components/BottomFilters";
 import TaskCount from "./components/TaskCount";
 import ClearCompletedTasks from "./components/ClearCompletedTasks";
+import useWindowDimensions from "./lib/hooks/useWindowDimension";
+import { Device, ScreenSizeContext } from "./lib/context/ScreenSize";
 
 export default function App() {
   const context = useContext(TaskContext);
   const { tasks, filteredTasks, setFilteredTasks, setTasks } = context;
+  const { width } = useWindowDimensions();
+  const [deviceType, setDeviceType] = useState<Device>(Device.NONE);
 
   useEffect(() => {
     const tasksFromLS = localStorage.getItem("tasks-synebo");
-    if (tasksFromLS) {
-      setFilteredTasks(JSON.parse(tasksFromLS));
-      setTasks(JSON.parse(tasksFromLS));
+    if (!tasksFromLS) {
+      return;
     }
-    return;
+    setFilteredTasks(JSON.parse(tasksFromLS));
+    setTasks(JSON.parse(tasksFromLS));
   }, [setFilteredTasks, setTasks]);
 
+  useEffect(() => {
+    width < 500 ? setDeviceType(Device.MOBILE) : setDeviceType(Device.DESKTOP);
+  }, [width]);
+
   return (
-    <div className="max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans">
-      <Header />
-      <div className="md:w-[550px] flex justify-center mt-20 items-center flex-col">
-        <TopNav />
-        <AddTaskForm />
-        {tasks && <TaskList taskList={tasks} filteredTasks={filteredTasks} />}
-        {tasks.length > 0 && (
-          <>
-            <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl bg-white rounded-t-lg">
-              <TaskCount tasks={tasks} />
-              <BottomFilters />
-              <ClearCompletedTasks tasks={tasks} />
-            </div>
-            <span className="mt-16 text-l-dark-grayish-blue">
-              Drag and drop to reorder list
-            </span>
-          </>
-        )}
+    <ScreenSizeContext.Provider value={{ deviceType }}>
+      <div className="md:max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans">
+        <Header />
+        <div className="w-[325px] sm:w-[550px] flex justify-center mt-[46px] md:mt-20 items-center flex-col">
+          <TopNav />
+          <AddTaskForm />
+          {tasks && <TaskList taskList={tasks} filteredTasks={filteredTasks} />}
+          {tasks.length > 0 && (
+            <>
+              <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl bg-white rounded-t-lg">
+                <TaskCount tasks={tasks} />
+                {deviceType === "desktop" && <BottomFilters />}
+
+                <ClearCompletedTasks tasks={tasks} />
+              </div>
+              {deviceType === "mobile" && <BottomFilters />}
+              <span className="mt-16 text-l-dark-grayish-blue">
+                Drag and drop to reorder list
+              </span>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </ScreenSizeContext.Provider>
   );
 }
