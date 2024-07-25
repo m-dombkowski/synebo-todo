@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AddTaskForm from "./components/AddTaskForm";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
@@ -8,11 +8,18 @@ import BottomFilters from "./components/BottomFilters";
 import TaskCount from "./components/TaskCount";
 import ClearCompletedTasks from "./components/ClearCompletedTasks";
 
-function App() {
+export default function App() {
   const context = useContext(TaskContext);
+  const { tasks, filteredTasks, setFilteredTasks, setTasks } = context;
 
-  if (!context) return;
-  const { tasks, filteredTasks } = context;
+  useEffect(() => {
+    const tasksFromLS = localStorage.getItem("tasks-synebo");
+    if (tasksFromLS) {
+      setFilteredTasks(JSON.parse(tasksFromLS));
+      setTasks(JSON.parse(tasksFromLS));
+    }
+    return;
+  }, [setFilteredTasks, setTasks]);
 
   return (
     <div className="max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans">
@@ -22,15 +29,18 @@ function App() {
         <AddTaskForm />
         {tasks && <TaskList taskList={tasks} filteredTasks={filteredTasks} />}
         {tasks.length > 0 && (
-          <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl">
-            <TaskCount tasks={tasks} />
-            <BottomFilters />
-            <ClearCompletedTasks tasks={tasks} />
-          </div>
+          <>
+            <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl bg-white rounded-t-lg">
+              <TaskCount tasks={tasks} />
+              <BottomFilters />
+              <ClearCompletedTasks tasks={tasks} />
+            </div>
+            <span className="mt-16 text-l-dark-grayish-blue">
+              Drag and drop to reorder list
+            </span>
+          </>
         )}
       </div>
     </div>
   );
 }
-
-export default App;
