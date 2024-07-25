@@ -52,7 +52,7 @@ export default function TaskList({
   };
 
   return (
-    <ul className="w-full bg-l-very-light-gray rounded-lg max-h-[350px] md:max-h-[500px] overflow-auto">
+    <ul className="w-full bg-l-very-light-gray dark:bg-d-very-dark-desaturated-blue rounded-lg max-h-[420px] md:max-h-[490px] overflow-auto">
       <DragAndDrop
         filteredTasks={filteredTasks}
         handleCompleteStatus={handleCompleteStatus}

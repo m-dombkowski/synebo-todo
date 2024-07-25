@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <ScreenSizeContext.Provider value={{ deviceType }}>
-      <div className="md:max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans dark:bg-d-very-dark-desaturated-blue -z-20">
+      <div className="md:max-w-[1440px] w-full flex justify-center items-center m-auto font-josefinSans dark:bg-d-very-dark-blue -z-20 min-h-svh">
         <Header />
         <div className="w-[325px] sm:w-[550px] flex justify-center mt-[46px] md:mt-20 items-center flex-col z-10">
           <TopNav />
@@ -39,7 +39,7 @@ export default function App() {
           {tasks && <TaskList taskList={tasks} filteredTasks={filteredTasks} />}
           {tasks.length > 0 && (
             <>
-              <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl bg-white rounded-lg ">
+              <div className="justify-between items-center flex py-5 w-full px-5 shadow-2xl bg-white rounded-lg dark:bg-d-very-dark-desaturated-blue">
                 <TaskCount tasks={tasks} />
                 {deviceType === "desktop" && <BottomFilters />}
 

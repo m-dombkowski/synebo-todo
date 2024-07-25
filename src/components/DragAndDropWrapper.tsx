@@ -68,7 +68,7 @@ export default function DragAndDrop({
               {...provided.dragHandleProps}
               key={task.id}
               data-id={task.id}
-              className="flex items-center justify-between w-full py-4 border-b-2 group "
+              className="flex items-center justify-between w-full py-4 border-b-2 last-of-type:border-b-0 group dark:border-b-d-very-dark-grayish-blue-hover dark:bg-d-very-dark-desaturated-blue"
             >
               <div className="flex gap-3.5 md:gap-5 ml-6 items-center">
                 <div className="inline-flex items-center ">
@@ -106,9 +106,9 @@ export default function DragAndDrop({
                 <span
                   className={cn(
                     task.completed
-                      ? "line-through text-l-dark-grayish-blue"
-                      : "",
-                    "text-[0.7rem] md:text-lg"
+                      ? "line-through text-l-dark-grayish-blue "
+                      : "dark:text-d-light-grayish-blue-hover",
+                    "text-sm md:text-lg"
                   )}
                 >
                   {task.title}
@@ -120,6 +120,7 @@ export default function DragAndDrop({
                   onClick={removeTaskHandler}
                 >
                   <svg
+                    className="dark:fill-white"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 50 50"
                     width={`${deviceType === "desktop" ? "24px" : "16px"}`}

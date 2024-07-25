@@ -56,14 +56,14 @@ export default function BottomFilters() {
 
   const FilterButton = ({ name }: { name: string }) => {
     return (
-      <span className="text-l-dark-grayish-blue font-josefinSansBold hover:text-l-very-dark-grayish-blue transition duration-300">
+      <span className="text-l-dark-grayish-blue font-josefinSansBold hover:text-l-very-dark-grayish-blue transition duration-300 dark:text-d-light-grayish-blue dark:hover:text-d-light-grayish-blue-hover">
         {name}
       </span>
     );
   };
 
   return (
-    <ul className="flex gap-5 justify-center items-center sm:mt-0 mt-10  text-base">
+    <ul className="flex gap-5 justify-center items-center sm:mt-0 mt-10  text-base ">
       {filters.map((filter, index) => {
         return filter.completed[0] === chosenFilter[0] &&
           filter.completed[1] === chosenFilter[1] ? (
